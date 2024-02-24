@@ -2,6 +2,10 @@
 title: Creating a Custom Extension
 ---
 
+:::warning
+These docs are not completely finished yet. We're slowly working on expanding the documentation while we work on other things, so please be patient with us!
+:::
+
 ## What is a Custom Extension?
 A custom extension adds a new category and blocks to the toolbox (sidebar).  
 You create these using [JavaScript](https://en.wikipedia.org/wiki/JavaScript), so you'll need at least a basic understanding of JavaScript to create one.

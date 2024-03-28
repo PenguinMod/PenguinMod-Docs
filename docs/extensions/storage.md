@@ -1,8 +1,11 @@
 ---
 title: Storage Extension
+sidebar_position: 2
 ---
 
 # Storage
+
+<img src="/img/docimages/storage_thumb.png" alt="Storage Extension Thumbnail" height="320"></img>
 
 Storage is an extension which allows you to save and get the value of variables which are either stored on the user's computer or on the PenguinMod servers.
 

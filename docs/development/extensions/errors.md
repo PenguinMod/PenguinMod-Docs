@@ -1,5 +1,6 @@
 ---
 title: Errors
+sidebar_position: 5
 ---
 
 ## The inevitable

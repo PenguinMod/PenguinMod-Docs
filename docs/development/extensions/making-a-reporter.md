@@ -1,5 +1,6 @@
 ---
 title: Making a reporter
+sidebar_position: 3
 ---
 
 :::note

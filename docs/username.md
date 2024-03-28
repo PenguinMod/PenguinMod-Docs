@@ -1,6 +1,10 @@
 ---
-title: Username blocks
+title: Username Blocks
+sidebar_position: 5
 ---
+
+# Username Blocks
+The Username blocks can be found at the bottom of the Sensing category in the Toolbox.
 
 PenguinMod deals with usernames in very different ways compared to Scratch, and maybe even TurboWarp.
 
@@ -9,7 +13,7 @@ Extensions or even players/users can mess with the username blocks to lie to the
 Please be careful to not use these blocks as full security behind an important menu.
 :::
 
-# (username)
+## (username)
 <img src="/img/docimages/username.png" alt="(username)" width="96"></img>
 This returns either the logged-in user's username, or a random username that can be changed by the person playing the project.
 This value can be spoofed (faked) by an extension or the player themselves. Please be careful when using this block.
@@ -23,7 +27,7 @@ This block can be any username, usually `player####` with `####` set to random n
 This block can be a real Scratch user's name even if the player is logged out.
 This name can be changed at the top in `Edit > Change Username` if the player is logged out.
 
-# &lt;logged in?&gt;
+## &lt;logged in?&gt;
 <img src="/img/docimages/loggedin.png" alt="&lt;logged in?&gt;" width="96"></img>
 This returns either `true` or `false` depending on if the player is logged in on the [Home page](https://penguinmod.com) of PenguinMod.
 This value will be false if the username is changed using the `set username to ()` block in the Sensing Expansion extension.

@@ -1,5 +1,6 @@
 ---
 title: Booleans
+sidebar_position: 4
 ---
 
 :::note

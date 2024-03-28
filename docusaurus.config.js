@@ -65,13 +65,18 @@ const config = {
         },
         items: [
           {
-            href: '/development/extensions/introduction',
+            href: '/extensions/',
+            label: 'Help with Extensions',
+            position: 'left'
+          },
+          {
+            href: '/development/extensions/',
             label: 'Custom Extensions',
             position: 'left'
           },
           {
             href: '/save-format/core-concepts',
-            label: 'File Save Format',
+            label: 'Concepting a new Save File Format',
             position: 'left'
           },
           {

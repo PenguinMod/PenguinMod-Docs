@@ -1,5 +1,6 @@
 ---
 title: First steps
+sidebar_position: 2
 ---
 
 :::note

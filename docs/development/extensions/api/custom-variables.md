@@ -1,5 +1,5 @@
 ---
-title: Variable API's
+title: Variable APIs
 ---
 
 interfaces for creating and displaying variable types.

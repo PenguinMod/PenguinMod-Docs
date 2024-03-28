@@ -1,5 +1,6 @@
 ---
 title: Arguments and their Types
+sidebar_position: 6
 ---
 
 :::note

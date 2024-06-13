@@ -38,6 +38,7 @@ keep in mind that in place of this object can be put `'---'` to represent a gap 
 | `defaultValue` | `any \| null` | the value of this argument that is set by default |
 | `menu` | `String \| null` | the key name of the menu that should take place of this argument |
 | `nodes` | `Number \| null` | the number of nodes a polygon argument should have, this key name only applies to polygon arguments |
+| `exemptFromNormalization` | `Boolean \| null` | if this input should be automaticaly casted to the inputs type |
 
 ## block type specialties
 #### COMMAND:

@@ -2,7 +2,7 @@
 title: Variable APIs
 ---
 
-interfaces for creating and managing variables other then the default scratch set. see [custom types](/development/extensions/api/custom-types) and [category ordering](/development/extensions/api/custom-ordering) for more information on how to display these custom variables
+interfaces for creating and managing variables other then the default scratch set. see [custom types](/development/extensions/api/custom-types) and [category ordering](/development/extensions/api/categories/category-info) for more information on how to display these custom variables
 
 ## menus
 setting `variableType` in a menu object to a string value of what variable type you want it to show will make the menu into a variable menu, no other arguments are required. note that the variable type of `"scalar"` will will be replaced with `Variable.SCALAR_TYPE`

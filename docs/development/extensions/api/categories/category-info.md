@@ -1,5 +1,5 @@
 ---
-title: category info keys
+title: Category Info
 ---
 
 a list of all keys that go into the object returned by `getInfo`.

@@ -1,5 +1,5 @@
 ---
-title: custom field types API
+title: Custom Fields API
 ---
 
 ## important notes

@@ -67,12 +67,20 @@ We are nearly there, we just need to define the type of the argument.
 This determines whether we can accept letters, only numbers, colors, and for that we need to go into:
 
 ### Argument Types
-Argument types define what our argument can take as an input.  
+Argument types define what our argument can take as an input. [See Here](/development/extensions/api/blocks/basic#argument) for all keys an argument can take.
 You can set an argument's type by setting the `type` property in the argument to a `Scratch.ArgumentType`.  
 Here is a list of all the available argument types:
 
-| |Explanation|Image|
+| |Value|Explanation|
 |:-:|:-:|:-:|
-|Scratch.BlockShape.ROUND|The default shape for a reporter.|<img src="/img/docimages/blockshape_round.png" alt="round block"></img>|
-|Scratch.BlockShape.HEXAGONAL|The default shape for a boolean. Takes up more space then other shapes.|<img src="/img/docimages/blockshape_hexagonal.png" alt="hexagonal block"></img>|
-|Scratch.BlockShape.SQUARE|The only shape to not be found normally!|<img src="/img/docimages/blockshape_square.png" alt="square block"></img>|
+|Scratch.ArgumentType.ANGLE|`'angle'`|Numeric value with angle picker|
+|Scratch.ArgumentType.BOOLEAN|`'Boolean'`|Boolean value with hexagonal placeholder|
+|Scratch.ArgumentType.COLOR|`'color'`|Numeric value with color picker|
+|Scratch.ArgumentType.NUMBER|`'number'`|Numeric value with text field|
+|Scratch.ArgumentType.STRING|`'string'`|String value with text field|
+|Scratch.ArgumentType.MATRIX|`'matrix'`|String value with matrix field|
+|Scratch.ArgumentType.NOTE|`'note'`|MIDI note number with note picker (piano) field|
+|Scratch.ArgumentType.IMAGE|`'image'`|Inline image on block (as part of the label)|
+|Scratch.ArgumentType.POLYGON|`polygon`|pm: creates an input with an indefinite number of x,y inputs|
+|Scratch.ArgumentType.COSTUME|`'costume'`|Costume menu (taken from tw)|
+|Scratch.ArgumentType.SOUND|`'sound'`|Sound menu (taken from tw)|

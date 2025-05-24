@@ -26,7 +26,7 @@ keep in mind that in place of this object can be put `'---'` to represent a gap 
 | `isDynamic` | `Boolean \| null` | sets up this block to use a mutator to store the block shape and allow for dynamic handling of the blocks shape (no system to actualy do this atm though), the code for this also seems to be utterly untouched since the orignal concievment of scratch3 and so probably needs updated
 | `arguments` | `{[String]: Argument}` | see bellow for the shape of the objects contained inside this list, to use these arguments you simply put into the strings of the text value `[argName]` where `argName` is the name of the argument in this list.
 | `isEdgeActivated` | `Boolean \| null` | only on hat/event blocks, defines if this block, when triggered by function evalutation, should continue to trigger for every instance the output is true or only trigger on instances where the output has changed to be true |
-| `switches` | `Array<String|BlockSwitch>` |
+| `switches` | `Array<String|BlockSwitch>` | Allows for a list of block switches (either a list of opcodes or of Block Switches) |
 | `switchText` | `String` | Optional string that defaults to using the same value as `text`. Used for integration with the block-switching addon. |
 
 ### Argument

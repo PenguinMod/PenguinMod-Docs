@@ -26,6 +26,10 @@ keep in mind that in place of this object can be put `'---'` to represent a gap 
 | `isDynamic` | `Boolean \| null` | sets up this block to use a mutator to store the block shape and allow for dynamic handling of the blocks shape (no system to actualy do this atm though), the code for this also seems to be utterly untouched since the orignal concievment of scratch3 and so probably needs updated
 | `arguments` | `{[String]: Argument}` | see bellow for the shape of the objects contained inside this list, to use these arguments you simply put into the strings of the text value `[argName]` where `argName` is the name of the argument in this list.
 | `isEdgeActivated` | `Boolean \| null` | only on hat/event blocks, defines if this block, when triggered by function evalutation, should continue to trigger for every instance the output is true or only trigger on instances where the output has changed to be true |
+| `label` | `String \| null` | Defines the label that should be used by the block monitor. |
+| `labelFn` | `String \| null` | Defines the function, under the extension class, that should be run to get the label for the block monitor. This function is passed an object of menu values; any [variables](development/extensions/api/custom-variables) are instead passed as their name. |
+| `switches` | `Array<String \| BlockSwitch> \| null` | Array that defines block switches. |
+| `switchText` | `String \| null` | Overwrite text used by the block switch addon. |
 
 ### Argument
 | key | type | description |
@@ -39,6 +43,16 @@ keep in mind that in place of this object can be put `'---'` to represent a gap 
 | `menu` | `String \| null` | the key name of the menu that should take place of this argument |
 | `nodes` | `Number \| null` | the number of nodes a polygon argument should have, this key name only applies to polygon arguments |
 | `exemptFromNormalization` | `Boolean \| null` | if this input should be automaticaly casted to the inputs type |
+
+## BlockSwitch
+
+| key | type | description |
+| --- | ---- | ----------- |
+| `opcode` | `String` | Required. Opcode to switch to.
+| `isNoop` | `Boolean \| null` | Defaults to false. Tells the block switch addon that it shouldn't be switched. |
+| `remapArguments` | `{ [String]: String } \| null` | An object that tells the block switch addon which arguments map onto others. |
+| `remapMenus` | `{ [String]: { [String]: String } } \| null` | Tells the addon which menu values should be used instead of the current ones. |
+| `overwriteText` | `String \| null` | Overwrites the text used by the addon. Overpowers `switchText`. |
 
 ## block type specialties
 #### COMMAND:

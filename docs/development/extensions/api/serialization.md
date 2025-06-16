@@ -80,6 +80,6 @@ class Extension {
 The extension storage APIs, located under both the runtime and each target individually, is an API originally from TurboWarp, ported to PenguinMod. They are both deprecated, and are purely included for compatibility.
 
 ```js
-vm.runtime.extensionStorage[youExtensionId] = { ... }
-target.extensionStorage[youExtensionId] = { ... }
+vm.runtime.extensionStorage[yourExtensionId] = { ... }
+target.extensionStorage[yourExtensionId] = { ... }
 ```

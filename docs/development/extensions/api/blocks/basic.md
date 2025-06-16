@@ -28,7 +28,7 @@ keep in mind that in place of this object can be put `'---'` to represent a gap 
 | `isEdgeActivated` | `Boolean \| null` | only on hat/event blocks, defines if this block, when triggered by function evalutation, should continue to trigger for every instance the output is true or only trigger on instances where the output has changed to be true |
 | `label` | `String \| null` | Defines the label that should be used by the block monitor. |
 | `labelFn` | `String \| null` | Defines the function, under the extension class, that should be run to get the label for the block monitor. This function is passed an object of menu values; any [variables](development/extensions/api/custom-variables) are instead passed as their name. |
-| `switches` | `Array<String \| BlockSwitch> \| null` | Array that defines block switches. |
+| `switches` | `Array<String \| BlockSwitch> \| null` | Array that defines block switches. (See [BlockSwitch](#BlockSwitch)) |
 | `switchText` | `String \| null` | Overwrite text used by the block switch addon. |
 
 ### Argument

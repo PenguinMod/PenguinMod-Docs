@@ -53,6 +53,7 @@ keep in mind that in place of this object can be put `'---'` to represent a gap 
 | `remapArguments` | `{ [String]: String } \| null` | An object that tells the block switch addon which arguments map onto others. |
 | `remapMenus` | `{ [String]: { [String]: String } } \| null` | Tells the addon which menu values should be used instead of the current ones. |
 | `overwriteText` | `String \| null` | Overwrites the text used by the addon. Overpowers `switchText`. |
+| `createArguments` | `{ [String]: String }` | Define a seperate default value. |
 
 ## block type specialties
 #### COMMAND:

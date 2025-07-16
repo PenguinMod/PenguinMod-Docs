@@ -8,7 +8,7 @@ The extension data APIs allow for the storage of data for extensions within the 
 
 ## `serialize`
 
-The serialize function is a function that gets defined under the extension class. Using it, you're able to store any data under the project root. Whatever gets returned, gets stored. Generally, 
+The serialize function is a function that gets defined under the extension class. Using it, you're able to store any data under the project root. Whatever gets returned, gets stored.
 
 ```js
 var xPosition = 0;
@@ -75,9 +75,9 @@ class Extension {
 }
 ```
 
-## `extensionStorage` APIs
+## `extensionStorage` APIs [deprecated]
 
-The extension storage APIs, located under both the runtime and each target individually, is an API originally from TurboWarp, ported to PenguinMod. They are both deprecated, and are purely included for compatibility.
+The `extensionStorage` APIs are both deprecated in PenguinMod, and purely exist for compatibility with TurboWarp.
 
 ```js
 vm.runtime.extensionStorage[yourExtensionId] = { ... }

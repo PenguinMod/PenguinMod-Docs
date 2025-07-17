@@ -31,6 +31,11 @@ In order to make custom inputs we need to first register them using ScratchBlock
           /* runs when input should be visually updated */
           // this can be left empty or can be used to change the input or its source block's size and more
           console.log("UPDATE", input, element);
+        },
+        (input, element) => {
+          /* runs when input is about to be removed */
+          // this is optional, can be used when you need to remove audio nodes or custom menus, etc
+          console.log("DELETE", input, element);
         }
       );
     });

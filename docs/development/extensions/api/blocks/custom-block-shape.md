@@ -61,7 +61,21 @@ In order to make custom block shapes we need to first register them using Scratc
               2: 1 * ScratchBlocks.BlockSvg.GRID_UNIT, // Round Input in custom shape
               ... /* more optional shapes */
             }
-          }
+          },
+          /*
+            blockPaddingStart and blockPaddingEnd are optional functions.
+            They should return a number, determining how much padding is added before and after the inputs & fields on the shape.
+            This is applied before your blockPadding values are added. You don't need it if you didn't need blockPadding or your blockPadding works fine.
+
+            This is used for the Boolean shape to add extra padding when the block gets very large vertically.
+            Below is a reimplementation of the Boolean shapes' settings.
+          */
+          blockPaddingStart: (block, otherShape, firstInput, firstField, row) => {
+            return Math.max(((firstInput.renderHeight - ScratchBlocks.BlockSvg.MIN_BLOCK_Y_REPORTER)) / 2, 0);
+          },
+          blockPaddingEnd: (block, otherShape, lastInput, lastField, row) => {
+            return Math.max(((lastInput.renderHeight - ScratchBlocks.BlockSvg.MIN_BLOCK_Y_REPORTER)) / 2, 0);
+          },
         }
       );
     });

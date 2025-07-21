@@ -6,17 +6,17 @@ This API allows you to change the shape of a reporter block to whatever you wish
 
 *You should have a decent knowledge of ScratchBlocks and SVG Paths to use this API*
 
-## [1] Registration
-In order to make custom block shapes we need to first register them using ScratchBlocks. Heres how you can register your shape:
+## Registration
+In order to make custom block shapes we need to first register them using ScratchBlocks. Here's how you can register your shape:
 ```js
   /* get ScratchBlocks if availiable... */
   if (Scratch.gui) {
     Scratch.gui.getBlockly().then(ScratchBlocks => {
-      SB.BlockSvg.registerCustomShape(
+      ScratchBlocks.BlockSvg.registerCustomShape(
         "[EXTENSION ID]-[SHAPE NAME]",
         {
           emptyInputPath: "m...z", // SVG Path (string) used for empty input slots
-          emptyInputWidth: 12 * SB.BlockSvg.GRID_UNIT, // Optional hard-coded width value for 'emptyInputPath'
+          emptyInputWidth: 12 * ScratchBlocks.BlockSvg.GRID_UNIT, // Optional hard-coded width value for 'emptyInputPath'
           leftPath: (block) => {
             /*
               required function that returns an array of SVG Paths
@@ -50,24 +50,25 @@ In order to make custom block shapes we need to first register them using Scratc
               For more information about padding values
             */
             internal: {
-              0: 5 * Blockly.BlockSvg.GRID_UNIT, // Field Input in custom shape
-              1: 2 * Blockly.BlockSvg.GRID_UNIT, // Hexagon Input in custom shape
-              2: 4 * Blockly.BlockSvg.GRID_UNIT, // Round Input in custom shape
+              0: 5 * ScratchBlocks.BlockSvg.GRID_UNIT, // Field Input in custom shape
+              1: 2 * ScratchBlocks.BlockSvg.GRID_UNIT, // Hexagon Input in custom shape
+              2: 4 * ScratchBlocks.BlockSvg.GRID_UNIT, // Round Input in custom shape
               ... /* more optional shapes */
             },
             external: {
-              0: 3 * Blockly.BlockSvg.GRID_UNIT, // Field Input in custom shape
-              1: 3 * Blockly.BlockSvg.GRID_UNIT, // Hexagon Input in custom shape
-              2: 1 * Blockly.BlockSvg.GRID_UNIT, // Round Input in custom shape
+              0: 3 * ScratchBlocks.BlockSvg.GRID_UNIT, // Field Input in custom shape
+              1: 3 * ScratchBlocks.BlockSvg.GRID_UNIT, // Hexagon Input in custom shape
+              2: 1 * ScratchBlocks.BlockSvg.GRID_UNIT, // Round Input in custom shape
               ... /* more optional shapes */
             }
           }
         }
       );
     });
+  }
 ```
 
-## [2] Using Custom Shapes in Your Extensions
+## Using Custom Shapes in Your Extensions
 
 Now that your shape is registered (with no errors), you can safely use the shape in your extension.
 
@@ -95,7 +96,7 @@ class Extension {
         /*
           If you want to make your custom shape strict
           (Only allowed to be inserted in Blocks of the same type)
-          do this:
+          add forceOutputType to the block and, for arguments, add check:
         */
         {
           opcode: 'myStrictShape',

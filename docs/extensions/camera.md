@@ -14,5 +14,7 @@ These docs are not completely finished yet. We're slowly working on expanding th
 Camera is an extension that allows the Stage view to move around, rotate, and zoom.
 
 :::warning
-As of now, the Camera extension does not work consistently with Interpolation enabled. It is recommended to disable interpolation if you plan on using this extension.
+As of now, the Camera extension does not work consistently with Interpolation enabled. This is a known bug and we are trying our best to fix it.
+It is recommended to disable interpolation if you plan on using this extension.
 :::
+

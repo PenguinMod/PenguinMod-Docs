@@ -1,5 +1,5 @@
 ---
-title: Editor Shortcuts
+title: Shortcuts
 sidebar_position: 5
 ---
 
@@ -9,7 +9,7 @@ These docs are not completely finished yet. We're slowly working on expanding th
 :::
 Using the keyboard or mouse, you can do a lot of actions quickly using key and mouse button combinations.
 
-## Editor
+## Code Editor
 With the **Duplicate script with Alt key** Editor Addon (enabled by default):
 - Holding `Alt` while dragging a block or block stack will duplicate the block(s).
 - Holding `Alt + Ctrl` while dragging a block inside a block stack will duplicate the block that was dragged, instead of the entire stack.

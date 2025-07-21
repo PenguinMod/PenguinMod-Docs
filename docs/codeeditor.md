@@ -4,6 +4,9 @@ sidebar_position: 4
 ---
 
 # Understanding the Code Editor
+:::warning
+These docs are not completely finished yet. We're slowly working on expanding the documentation while we work on other things, so please be patient with us!
+:::
 
 The code editor has lots of individual parts that can be named, seen below:
 <img src="/img/docimages/studio-diagram.png" alt="Diagram of the Studio"></img>

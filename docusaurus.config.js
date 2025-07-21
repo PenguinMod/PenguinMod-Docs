@@ -65,6 +65,11 @@ const config = {
         },
         items: [
           {
+            href: '/blocks/',
+            label: 'Help with Blocks',
+            position: 'left'
+          },
+          {
             href: '/extensions/',
             label: 'Help with Extensions',
             position: 'left'

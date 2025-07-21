@@ -76,8 +76,10 @@ class Extension {
 ```
 
 ## `extensionStorage` APIs [deprecated]
-
-The `extensionStorage` APIs are both deprecated in PenguinMod, and purely exist for compatibility with TurboWarp.
+:::danger
+This API is deprecated and only included in PenguinMod for compatibility with TurboWarp extensions.
+Use the [serialize](#serialize), [deserialize](#deserialize), [serializeForTarget](#serializeForTarget) and [deserializeForTarget](#deserializeForTarget) APIs for PenguinMod extensions.
+:::
 
 ```js
 vm.runtime.extensionStorage[yourExtensionId] = { ... }

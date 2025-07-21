@@ -4,6 +4,9 @@ sidebar_position: 3
 ---
 
 # Parts of PenguinMod
+:::warning
+These docs are not completely finished yet. We're slowly working on expanding the documentation while we work on other things, so please be patient with us!
+:::
 These are individual parts of PenguinMod that make up a section of one of PenguinMod's sites.
 
 ## The Stage

@@ -4,6 +4,9 @@ sidebar_position: 2
 ---
 
 # Websites in PenguinMod
+:::warning
+These docs are not completely finished yet. We're slowly working on expanding the documentation while we work on other things, so please be patient with us!
+:::
 There are several individual websites used in PenguinMod, so let's cover them.
 
 ## Home page

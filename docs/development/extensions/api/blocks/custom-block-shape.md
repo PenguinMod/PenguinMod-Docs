@@ -540,58 +540,173 @@ Implementing all of the above properties, we get this shape:
 <img src="/img/docimages/customblockshape_example1.png" alt="Example Block"></img>
 
 ## Using a Custom Shape in your Extension
-:::note
-TODO: Explain the properties and their purpose
-:::
-
 Now that your shape is registered (with no errors), you can safely use the shape in your extension.
 
-Heres how to format the block JSON:
+### Make an output block
+In your extension's category, make a basic block:
 
 ```js
-...
-class Extension {
-  getInfo() {
-    return {
-      id: '...',
-      name: 'example',
-      blocks: [
-        {
-          opcode: 'myCoolShape',
-          blockType: BlockType.REPORTER,
-          blockShape: "[EXTENSION ID]-[SHAPE NAME]",
-          text: 'custom shape [CUSTOM_EMPTY_BLOCK]',
-          arguments: {
-            CUSTOM_EMPTY_BLOCK: {
-              shape: "[EXTENSION ID]-[SHAPE NAME]"
-            }
-          }
-        },
-        /*
-          If you want to make your custom shape strict
-          (Only allowed to be inserted in Blocks of the same type)
-          add forceOutputType to the block and, for arguments, add check:
-        */
-        {
-          opcode: 'myStrictShape',
-          blockType: BlockType.REPORTER,
-          blockShape: "[EXTENSION ID]-[SHAPE NAME]",
-          forceOutputType: "[EXTENSION ID]-[SHAPE NAME]",
-          text: 'custom shape [CUSTOM_EMPTY_BLOCK]',
-          arguments: {
-            CUSTOM_EMPTY_BLOCK: {
-              shape: "[EXTENSION ID]-[SHAPE NAME]",
-              check: "[EXTENSION ID]-[SHAPE NAME]",
-            }
-          }
-        },
-      ]
-    }
-  }
-}
-...
+blocks: [
+    {
+        opcode: 'triangleCutShape',
+        text: 'triangle cut',
+        blockType: Scratch.BlockType.REPORTER,
+    },
+]
 ```
 
-and you're done!
+To give it our custom shape, we need to add the [`blockShape`](/development/extensions/api/blocks/blockshape) parameter:
 
-<img src="/img/docimages/custom_shape_example.png" alt="Image showing 2 custom block shapes"></img>
+```js
+{
+    opcode: 'triangleCutShape',
+    text: 'triangle cut',
+    blockType: Scratch.BlockType.REPORTER,
+    blockShape: "myReallyCoolExtension-triangleCut",
+},
+```
+
+<img src="/img/docimages/customblockshape_example_ext1.png" alt="Example Output Block"></img>
+
+### `forceOutputType` (optional)
+If you *only* want this block to fit into other block's arguments using the same shape, then you need to add the `forceOutputType` parameter:
+
+```js
+{
+    opcode: 'triangleCutShape',
+    text: 'triangle cut',
+    blockType: Scratch.BlockType.REPORTER,
+    blockShape: "myReallyCoolExtension-triangleCut",
+    forceOutputType: "myReallyCoolExtension-triangleCut",
+},
+```
+
+You also need [the input block](#make-an-input-block) to add the `check` parameter into it's argument.
+
+### Make an input block
+In your extension's category, make a basic block with an argument:
+
+```js
+{
+    opcode: 'triangleCutWanted',
+    text: 'I want a triangle cut [TRIANGLECUT]',
+    blockType: Scratch.BlockType.REPORTER,
+    arguments: {
+        TRIANGLECUT: {
+            // ???
+        }
+    }
+},
+```
+
+Then, add the `shape` property to specify the shape that the argument should take:
+
+```js
+{
+    opcode: 'triangleCutWanted',
+    text: 'I want a triangle cut [TRIANGLECUT]',
+    blockType: Scratch.BlockType.REPORTER,
+    arguments: {
+        TRIANGLECUT: {
+            shape: "myReallyCoolExtension-triangleCut",
+        }
+    }
+},
+```
+
+<img src="/img/docimages/customblockshape_example_ext2.png" alt="Example Input Block"></img>
+
+If you added `forceOutputType` to the output block from earlier, you also need to specify the `check` property:
+
+```js
+{
+    opcode: 'triangleCutWanted',
+    text: 'I want a triangle cut [TRIANGLECUT]',
+    blockType: Scratch.BlockType.REPORTER,
+    arguments: {
+        TRIANGLECUT: {
+            shape: "myReallyCoolExtension-triangleCut",
+            check: "myReallyCoolExtension-triangleCut",
+        }
+    }
+},
+```
+
+<img src="/img/docimages/customblockshape_example_ext3.png" alt="Example Input Block with Output Block inside"></img>
+
+## Example Block Extension Code
+Here's the full code example for our block from earlier:
+
+```js
+(function(Scratch) {
+    'use strict';
+
+    /* get ScratchBlocks if availiable... */
+    if (Scratch.gui) {
+        Scratch.gui.getBlockly().then(ScratchBlocks => {
+            // here you have access to ScratchBlocks safely
+            ScratchBlocks.BlockSvg.registerCustomShape("myReallyCoolExtension-triangleCut", {
+                emptyInputPath: "m 16 0 h 16 h 33 a 4 4 0 0 1 4 4 l -27 12 l 27 12 a 4 4 0 0 1 -4 4 h -33 h -16 h -12 a 4 4 0 0 1 -4 -4 l 0 -24 a 4 4 0 0 1 4 -4 z",
+                emptyInputWidth: 19 * ScratchBlocks.BlockSvg.GRID_UNIT,
+                leftPath: (block) => {
+                    const s = block.edgeShapeWidth_ / 16;
+                    const height = block.edgeShapeWidth_ * 2;
+                    return [`h ${-12 * s} a 4 4 0 0 1 -4 -4 l ${0 * s} ${-(height - 8)} a 4 4 0 0 1 4 -4`];
+                },
+                rightPath: (block) => {
+                    const s = block.edgeShapeWidth_ / 16;
+                    const height = block.edgeShapeWidth_ * 2;
+                    return [`h ${33 * s} a 4 4 0 0 1 4 4 l ${-27 * s} ${(height / 2) - 4} l ${27 * s} ${(height / 2) - 4} a 4 4 0 0 1 -4 4 h ${-33 * s}`];
+                },
+                blockPadding: {
+                    internal: {
+                        1: 25 * ScratchBlocks.BlockSvg.GRID_UNIT, // Hexagon in custom shape.
+                    },
+                    external: {
+                        1: 50 * ScratchBlocks.BlockSvg.GRID_UNIT, // Custom shape in hexagon.
+                    },
+                },
+                blockPaddingStart: (block, otherShape, firstInput, firstField, row) => {
+                    return Math.max(((firstInput.renderHeight - ScratchBlocks.BlockSvg.MIN_BLOCK_Y_REPORTER)) / 8, 0);
+                },
+                blockPaddingEnd: (block, otherShape, lastInput, lastField, row) => {
+                    return Math.max(((lastInput.renderHeight - ScratchBlocks.BlockSvg.MIN_BLOCK_Y_REPORTER)) / 2, 0);
+                },
+            });
+        });
+    }
+
+    class MyReallyCoolExtension {
+        getInfo() {
+            return {
+                id: 'myReallyCoolExtension',
+                name: 'My Really Cool Extension',
+                blocks: [
+                    {
+                        opcode: 'triangleCutShape',
+                        text: 'triangle cut',
+                        blockType: Scratch.BlockType.REPORTER,
+                        blockShape: "myReallyCoolExtension-triangleCut",
+                        forceOutputType: "myReallyCoolExtension-triangleCut",
+                    },
+                    {
+                        opcode: 'triangleCutWanted',
+                        text: 'I want a triangle cut [TRIANGLECUT]',
+                        blockType: Scratch.BlockType.REPORTER,
+                        arguments: {
+                            TRIANGLECUT: {
+                                shape: "myReallyCoolExtension-triangleCut",
+                                check: "myReallyCoolExtension-triangleCut",
+                            }
+                        }
+                    },
+                ]
+            }
+        }
+    }
+    
+    Scratch.extensions.register(new MyReallyCoolExtension());
+})(Scratch);
+```
+
+<img src="/img/docimages/customblockshape_example_full.png" alt="Example Extension"></img>

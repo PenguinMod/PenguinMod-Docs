@@ -12,7 +12,7 @@ a list of all keys that go into the object returned by `getInfo`.
 | `color3` | `String \| null` must match `/^#[0-9a-f]{6}$/i` | the tertiary color of all blocks and the category icon, defaults to 0.2 mix with black |
 | `showStatusButton` | `Boolean \| null` | if a status button should be shown on this category, used by extensions that connect to something external like the ev3 brick |
 | `blockIconURI` | `String \| null` | the image to be shown as the icon of all blocks in this category |
-| `menuIconURI` | `String \| null` | what the fuck, fuck the what |
+| `menuIconURI` | `String \| null` | Needs message here |
 | `isDynamic` | `Boolean \| null` | if this category should update more regularly due too a seperate set of events, also states if the orderBlocks function should be carried over |
 | `orderBlocks` | `function(blocks: Array<String>): Array<String> \| null` | a function for handling how the contents of this category should be placed or when they should exist |
 | `tbShow` | `Boolean \| null` | (unimplemented) show an icon stating this extension was made using turbobuilder |

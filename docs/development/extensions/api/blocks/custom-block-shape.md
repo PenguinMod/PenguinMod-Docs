@@ -158,14 +158,17 @@ For this example shape, we will use `19 * ScratchBlocks.BlockSvg.GRID_UNIT`.
 `leftPath` is a function that constructs the left-side of your SVG path. To fill this out, do the following:
 
 #### Copy this template:
+To start the `leftPath`, use this template:
 ```js
 leftPath: (block) => {
-    const s = block.edgeShapeWidth_ / 16;
+    const edgeWidth = block.height / 2;
+    const s = edgeWidth / 16;
     return [];
 },
 ```
-*`block.edgeShapeWidth_` is half of the width of the edge of the block. Essentially, this is half of the height of the block.*
-*The `s` variable should scale to 1 unit in the path you just made.*
+*`block.height` is the height of the block. We divide this by 2 to match with the value used in [`rightPath`](#copy-this-template-1) because it makes the math easier.*
+*Using `block.height` in `leftPath` also allows this block shape to work properly when it is given a branch input.*
+*The `s` variable should now scale to 1 unit in the path you just made.*
 
 #### Find the first command after the left-side of the shape starts.
 The left-side is (some-what confusingly) at the end of your shape's path, and it's a little complicated to find the commands here.
@@ -181,14 +184,16 @@ In this diagram, the first item after the left-side starts has it's command circ
 Once you find the command in the output path, copy the command and everything after it into the `return [];` section like so:
 ```js
 leftPath: (block) => {
-    const s = block.edgeShapeWidth_ / 16;
+    const edgeWidth = block.height / 2;
+    const s = edgeWidth / 16;
     return [`h -12 a 4 4 0 0 1 -4 -4 l 0 -24 a 4 4 0 0 1 4 -4 z`];
 },
 ```
 Then, remove the ending `z` command and it's space beforehand.
 ```js
 leftPath: (block) => {
-    const s = block.edgeShapeWidth_ / 16;
+    const edgeWidth = block.height / 2;
+    const s = edgeWidth / 16;
     return [`h -12 a 4 4 0 0 1 -4 -4 l 0 -24 a 4 4 0 0 1 4 -4`];
 },
 ```
@@ -202,7 +207,8 @@ You can tell where your commands have a flag by either looking at the commands i
 
 ```js
 leftPath: (block) => {
-    const s = block.edgeShapeWidth_ / 16;
+    const edgeWidth = block.height / 2;
+    const s = edgeWidth / 16;
     return [`h ${-12 * s} a ${4 * s} ${4 * s} ${0 * s} 0 1 ${-4 * s} ${-4 * s} l ${0 * s} ${-24 * s} a ${4 * s} ${4 * s} ${0 * s} 0 1 ${4 * s} ${-4 * s}`];
 },
 ```
@@ -213,18 +219,21 @@ Our example shape has rounded corners that shouldn't scale with the entire block
 This shape's corners are 4 units in width and height, so we need to make it's corners not use the `s` variable:
 ```js
 leftPath: (block) => {
-    const s = block.edgeShapeWidth_ / 16;
+    const edgeWidth = block.height / 2;
+    const s = edgeWidth / 16;
     return [`h ${-12 * s} a 4 4 0 0 1 -4 -4 l ${0 * s} ${-24 * s} a 4 4 0 0 1 4 -4`];
 },
 ```
 and make the center line between the 2 corners double the block's height, but remove 8 units (for the 2 corners):
 ```js
 leftPath: (block) => {
-    const s = block.edgeShapeWidth_ / 16;
-    const height = block.edgeShapeWidth_ * 2;
+    const edgeWidth = block.height / 2;
+    const s = edgeWidth / 16;
+    const height = edgeWidth * 2;
     return [`h ${-12 * s} a 4 4 0 0 1 -4 -4 l ${0 * s} ${-(height - 8)} a 4 4 0 0 1 4 -4`];
 },
 ```
+*Still using `edgeWidth` so `height` is the same value in [`rightPath`](#rightpath).*
 
 #### Example (with `leftPath` and `rightPath` set)
 <img src="/img/docimages/customblockshape_example1.png" alt="Example block shape"></img>
@@ -235,8 +244,9 @@ leftPath: (block) => {
     emptyInputPath: "(path)",
     emptyInputWidth: 19 * ScratchBlocks.BlockSvg.GRID_UNIT,
     leftPath: (block) => {
-        const s = block.edgeShapeWidth_ / 16;
-        const height = block.edgeShapeWidth_ * 2;
+        const edgeWidth = block.height / 2;
+        const s = edgeWidth / 16;
+        const height = edgeWidth * 2;
         return [`h ${-12 * s} a 4 4 0 0 1 -4 -4 l ${0 * s} ${-(height - 8)} a 4 4 0 0 1 4 -4`];
     },
     rightPath: (block) => {
@@ -253,10 +263,14 @@ To fill this out, do the following:
 To start the `rightPath`, use this template:
 ```js
 rightPath: (block) => {
-    const s = block.edgeShapeWidth_ / 16;
+    const edgeWidth = block.edgeShapeWidth_;
+    const s = edgeWidth / 16;
     return [];
 },
 ```
+*`block.edgeShapeWidth_` is half of the width of the edge of the block. Essentially, this is half of the height of the block.*
+*Unlike [`leftPath`](#copy-this-template), we actually don't have access to the `block.height` variable in `rightPath` yet. The block's height is calculated after the `rightPath` is drawn, since the `rightPath` is actually drawn before the `leftPath`. This means we need to use `block.edgeShapeWidth_` as the best guess for the block's height for now.*
+*The `s` variable should now scale to 1 unit in the path you just made.*
 
 #### Find the first command after the right-side of the shape starts.
 The right-side starts very early into the path, so it should be simple to find the first command after it starts.
@@ -269,7 +283,8 @@ You then want to copy every command *up until before* the command that starts th
 
 ```js
 rightPath: (block) => {
-    const s = block.edgeShapeWidth_ / 16;
+    const edgeWidth = block.edgeShapeWidth_;
+    const s = edgeWidth / 16;
     return [`h 33 a 4 4 0 0 1 4 4 l -27 12 l 27 12 a 4 4 0 0 1 -4 4 h -33`];
 },
 ```
@@ -283,8 +298,9 @@ This shape also needs the ["(Optionally) make parts of the shape not scale"](#op
 In this case, our shape has a large cut hole on the right-side made of 2 lines about half the height of the edge. We can apply this like so:
 ```js
 rightPath: (block) => {
-    const s = block.edgeShapeWidth_ / 16;
-    const height = block.edgeShapeWidth_ * 2;
+    const edgeWidth = block.edgeShapeWidth_;
+    const s = edgeWidth / 16;
+    const height = edgeWidth * 2;
     return [`h ${33 * s} a 4 4 0 0 1 4 4 l ${-27 * s} ${(height / 2) - 4} l ${27 * s} ${(height / 2) - 4} a 4 4 0 0 1 -4 4 h ${-33 * s}`];
 },
 ```
@@ -302,13 +318,15 @@ This property is optional.
     emptyInputPath: "(path)",
     emptyInputWidth: 19 * ScratchBlocks.BlockSvg.GRID_UNIT,
     leftPath: (block) => {
-        const s = block.edgeShapeWidth_ / 16;
-        const height = block.edgeShapeWidth_ * 2;
+        const edgeWidth = block.height / 2;
+        const s = edgeWidth / 16;
+        const height = edgeWidth * 2;
         return [`h ${-12 * s} a 4 4 0 0 1 -4 -4 l ${0 * s} ${-(height - 8)} a 4 4 0 0 1 4 -4`];
     },
     rightPath: (block) => {
-        const s = block.edgeShapeWidth_ / 16;
-        const height = block.edgeShapeWidth_ * 2;
+        const edgeWidth = block.edgeShapeWidth_;
+        const s = edgeWidth / 16;
+        const height = edgeWidth * 2;
         return [`h ${33 * s} a 4 4 0 0 1 4 4 l ${-27 * s} ${(height / 2) - 4} l ${27 * s} ${(height / 2) - 4} a 4 4 0 0 1 -4 4 h ${-33 * s}`];
     },
     blockPadding: {
@@ -407,13 +425,15 @@ This property is optional.
     emptyInputPath: "(path)",
     emptyInputWidth: 19 * ScratchBlocks.BlockSvg.GRID_UNIT,
     leftPath: (block) => {
-        const s = block.edgeShapeWidth_ / 16;
-        const height = block.edgeShapeWidth_ * 2;
+        const edgeWidth = block.height / 2;
+        const s = edgeWidth / 16;
+        const height = edgeWidth * 2;
         return [`h ${-12 * s} a 4 4 0 0 1 -4 -4 l ${0 * s} ${-(height - 8)} a 4 4 0 0 1 4 -4`];
     },
     rightPath: (block) => {
-        const s = block.edgeShapeWidth_ / 16;
-        const height = block.edgeShapeWidth_ * 2;
+        const edgeWidth = block.edgeShapeWidth_;
+        const s = edgeWidth / 16;
+        const height = edgeWidth * 2;
         return [`h ${33 * s} a 4 4 0 0 1 4 4 l ${-27 * s} ${(height / 2) - 4} l ${27 * s} ${(height / 2) - 4} a 4 4 0 0 1 -4 4 h ${-33 * s}`];
     },
     blockPadding: {
@@ -467,13 +487,15 @@ This property is optional.
     emptyInputPath: "(path)",
     emptyInputWidth: 19 * ScratchBlocks.BlockSvg.GRID_UNIT,
     leftPath: (block) => {
-        const s = block.edgeShapeWidth_ / 16;
-        const height = block.edgeShapeWidth_ * 2;
+        const edgeWidth = block.height / 2;
+        const s = edgeWidth / 16;
+        const height = edgeWidth * 2;
         return [`h ${-12 * s} a 4 4 0 0 1 -4 -4 l ${0 * s} ${-(height - 8)} a 4 4 0 0 1 4 -4`];
     },
     rightPath: (block) => {
-        const s = block.edgeShapeWidth_ / 16;
-        const height = block.edgeShapeWidth_ * 2;
+        const edgeWidth = block.edgeShapeWidth_;
+        const s = edgeWidth / 16;
+        const height = edgeWidth * 2;
         return [`h ${33 * s} a 4 4 0 0 1 4 4 l ${-27 * s} ${(height / 2) - 4} l ${27 * s} ${(height / 2) - 4} a 4 4 0 0 1 -4 4 h ${-33 * s}`];
     },
     blockPadding: {
@@ -511,13 +533,15 @@ Implementing all of the above properties, we get this shape:
     emptyInputPath: "m 16 0 h 16 h 33 a 4 4 0 0 1 4 4 l -27 12 l 27 12 a 4 4 0 0 1 -4 4 h -33 h -16 h -12 a 4 4 0 0 1 -4 -4 l 0 -24 a 4 4 0 0 1 4 -4 z",
     emptyInputWidth: 19 * ScratchBlocks.BlockSvg.GRID_UNIT,
     leftPath: (block) => {
-        const s = block.edgeShapeWidth_ / 16;
-        const height = block.edgeShapeWidth_ * 2;
+        const edgeWidth = block.height / 2;
+        const s = edgeWidth / 16;
+        const height = edgeWidth * 2;
         return [`h ${-12 * s} a 4 4 0 0 1 -4 -4 l ${0 * s} ${-(height - 8)} a 4 4 0 0 1 4 -4`];
     },
     rightPath: (block) => {
-        const s = block.edgeShapeWidth_ / 16;
-        const height = block.edgeShapeWidth_ * 2;
+        const edgeWidth = block.edgeShapeWidth_;
+        const s = edgeWidth / 16;
+        const height = edgeWidth * 2;
         return [`h ${33 * s} a 4 4 0 0 1 4 4 l ${-27 * s} ${(height / 2) - 4} l ${27 * s} ${(height / 2) - 4} a 4 4 0 0 1 -4 4 h ${-33 * s}`];
     },
     blockPadding: {
@@ -649,13 +673,15 @@ Here's the full code example for our block from earlier:
                 emptyInputPath: "m 16 0 h 16 h 33 a 4 4 0 0 1 4 4 l -27 12 l 27 12 a 4 4 0 0 1 -4 4 h -33 h -16 h -12 a 4 4 0 0 1 -4 -4 l 0 -24 a 4 4 0 0 1 4 -4 z",
                 emptyInputWidth: 19 * ScratchBlocks.BlockSvg.GRID_UNIT,
                 leftPath: (block) => {
-                    const s = block.edgeShapeWidth_ / 16;
-                    const height = block.edgeShapeWidth_ * 2;
+                    const edgeWidth = block.height / 2;
+                    const s = edgeWidth / 16;
+                    const height = edgeWidth * 2;
                     return [`h ${-12 * s} a 4 4 0 0 1 -4 -4 l ${0 * s} ${-(height - 8)} a 4 4 0 0 1 4 -4`];
                 },
                 rightPath: (block) => {
-                    const s = block.edgeShapeWidth_ / 16;
-                    const height = block.edgeShapeWidth_ * 2;
+                    const edgeWidth = block.edgeShapeWidth_;
+                    const s = edgeWidth / 16;
+                    const height = edgeWidth * 2;
                     return [`h ${33 * s} a 4 4 0 0 1 4 4 l ${-27 * s} ${(height / 2) - 4} l ${27 * s} ${(height / 2) - 4} a 4 4 0 0 1 -4 4 h ${-33 * s}`];
                 },
                 blockPadding: {

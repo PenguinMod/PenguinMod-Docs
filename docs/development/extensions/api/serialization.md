@@ -1,10 +1,10 @@
 ---
-title: Extension Data
+title: Data Storage
 ---
 
-# Extension Data
+# Data Storage
 
-The extension data APIs allow for the storage of data for extensions within the project file. This is split into 4 functions:
+The data storage APIs allow for the storage of data for extensions within the project file (under the `extensionData` key). This is split into 4 functions:
 
 ## `serialize`
 
@@ -76,9 +76,9 @@ class Extension {
 ```
 
 ## `extensionStorage` APIs [deprecated]
-:::danger
-This API is deprecated and only included in PenguinMod for compatibility with TurboWarp extensions.
-Use the [serialize](#serialize), [deserialize](#deserialize), [serializeForTarget](#serializeForTarget) and [deserializeForTarget](#deserializeForTarget) APIs for PenguinMod extensions.
+:::danger[Deprecated]
+This API is deprecated. It's only included in PenguinMod for compatibility with TurboWarp extensions.
+Use the [serialize](#serialize), [deserialize](#deserialize), [serializeForTarget](#serializeForTarget) and [deserializeForTarget](#deserializeForTarget) APIs, instead.
 :::
 
 ```js

@@ -1,0 +1,1 @@
+!function(o){"use strict";o.extensions.register(new class{getInfo(){return{id:"johnMyExtension",name:"My Extension",blocks:[{opcode:"logToConsole",text:"log to console",blockType:o.BlockType.COMMAND}]}}logToConsole(){console.log("Hello world!")}})}(Scratch);

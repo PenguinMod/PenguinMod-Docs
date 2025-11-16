@@ -34,6 +34,7 @@ const config = {
         defaultLocale: 'en',
         locales: ['en'],
     },
+    
     presets: [
         [
             'classic',

@@ -16,7 +16,7 @@ const config = {
     url: 'https://docs.penguinmod.com',
     // Set the /<baseUrl>/ pathname under which your site is served
     // For GitHub pages deployment, it is often '/<projectName>/'
-    baseUrl: '/PenguinMod-Docs/',
+    baseUrl: '/',
     trailingSlash: true,
     
     // GitHub pages deployment config.

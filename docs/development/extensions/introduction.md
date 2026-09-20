@@ -17,7 +17,7 @@ When creating your extension, you likely want to load from Text and check the bo
 
 ## Recommendations
 As mentioned earlier, it is highly recommended that you have some knowledge of [JavaScript](https://en.wikipedia.org/wiki/JavaScript).  
-This'll help you actually program things once your done here.
+This will help you actually program things once you're done here.
 
 It is also recommended that you use a browser with Developer Tools enabled.  
 If you are using a mobile device or a device owned by an organization or school, you might not be able to access it.
